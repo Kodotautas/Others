@@ -8,6 +8,7 @@ cwd = os.getcwd()
 sector = filters[0] #get loaded sector
 today = date.today()
 
+
 # -------------------------------- STOCKS LIST ------------------------------- #
 stocks_df = pd.read_csv(f'{cwd}/data/stocks.csv')
 stocks = stocks_df['Ticker'].to_list()

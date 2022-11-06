@@ -3,13 +3,14 @@ from finviz.screener import Screener
 import pandas as pd
 
 cwd = os.getcwd()
+print(cwd)
 
 # --------------------------------- GET DATA --------------------------------- #
-filters = ['sec_technology'] #sec_consumercyclical
+filters = ['sec_technology'] #tech stocks
 stock_list = Screener(filters=filters, table='Valuation', order='price')  # Get the performance table and sort it by price ascending
 
 # Add more filters
-stock_list.add(filters=['cap_midover', 'fa_estltgrowth_pos'])  # Show stocks with high dividend yield
-stock_list.to_csv(f'{cwd}/data/stocks.csv')
+stock_list.add(filters=['cap_midover', 'fa_estltgrowth_pos'])  # Show stocks with hight market cap and positive earnings growth
+stock_list.to_csv(f'{cwd}/data/stocks.csv')  # Export the table to a csv file
 
 print('Stocks list saved')
