@@ -75,7 +75,7 @@ class Keys_Tracker:
         keypress_speed.append(sum_keypresses)
         return sum_keypresses
 
-    #retrun top n keypresses from store_keypresses dictionary
+    #return top n keypresses from store_keypresses dictionary
     def top_n_keypresses(self, dictionary, n):
         """return top n keypresses
         Returns:
