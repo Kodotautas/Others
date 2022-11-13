@@ -3,15 +3,14 @@ import subprocess
 
 location = os.path.dirname(os.path.abspath(__file__))
 
-print(location)
-print('-------------------------')
-#main function
+#main function of the program
 def main():
     while True:
+        interval = input('Enter the interval in seconds: ')
+        session = input('Enter the session in seconds: ')
         task = input("Enter 'start' / 'stop' to manage app: ")
         if task == 'start':
-            #call main.py with subprocess
-            subprocess.call(['python', 'main.py'], cwd=location)
+            subprocess.call(f'python main.py -i {interval} -s {session}', cwd=location)
         elif task == 'stop':
             subprocess.call(['taskkill', '/F', '/IM', 'python.exe'])
         else:

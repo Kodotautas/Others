@@ -1,101 +1,70 @@
-package main
+// package main
 
-import "time"
+// import (
+// 	"flag"
+// )
 
-var interval interface{}
-var session interface{}
-var n interface{}
-var keypresses map[interface{}]interface{}
-var keypress_total_dict map[interface{}]interface{}
-var keypresses_total []interface{}
-var keypress_speed []interface{}
+// // add arguments
+// func main() {
+// 	interval := flag.Float64("interval", 1.0, "interval in seconds")
+// 	session := flag.Float64("session", 60.0, "session in seconds")
+// 	n := flag.Int("n", 5, "top n keypresses")
+// 	flag.Parse()
+// }
 
-type Keys_Tracker struct {
-	keypresses          map[interface{}]interface{}
-	keypress_total_dict map[interface{}]interface{}
-	start_time          float64
-	interval            interface{}
-	session             interface{}
-}
+// var keypresses map[interface{}]interface{}
+// var keypress_total_dict map[interface{}]interface{}
+// var keypresses_total []interface{}
+// var keypress_speed []interface{}
 
-func init() {
-	interval = 5
-	session = 60
-	n = 3
-	keypresses = map[interface{}]interface{}{}
-	keypress_total_dict = map[interface{}]interface{}{}
-	keypresses_total = []interface{}{}
-	keypress_speed = []interface{}{}
-}
+// // store keypresses in keypress dictionary
+// func store_keypress(keypress interface{}) {
+// 	if keypresses[keypress] == nil {
+// 		keypresses[keypress] = 1
+// 	} else {
+// 		keypresses[keypress] = keypresses[keypress].(int) + 1
+// 	}
+// }
 
-func NewKeys_Tracker() (self *Keys_Tracker) {
-	self = &Keys_Tracker{}
-	self.keypresses = map[interface{}]interface{}{}
-	self.keypress_total_dict = map[interface{}]interface{}{}
-	self.start_time = float64(time.Now().UnixNano()) / 1000000000.0
-	self.interval = interval
-	self.session = session
-	return
-}
+// // store total keypresses in dictionary
+// func store_keypress_total(keypress interface{}) {
+// 	if keypress_total_dict[keypress] == nil {
+// 		keypress_total_dict[keypress] = 1
+// 	} else {
+// 		keypress_total_dict[keypress] = keypress_total_dict[keypress].(int) + 1
+// 	}
+// }
 
-//store keypresses in dictionary
-func (self *Keys_Tracker) store_keypresses(keypresses map[interface{}]interface{}) {
-	for key, value := range keypresses {
-		if _, ok := self.keypresses[key]; ok {
-			self.keypresses[key] = self.keypresses[key].(int) + value.(int)
-		} else {
-			self.keypresses[key] = value
-		}
-	}
-}
+// // sum how many keypresses in interval and store in dictionary
+// func count_keypresses() {
+// 	for i := 0; i < len(keypresses_total); i++ {
+// 		store_keypress(keypresses_total[i])
+// 	}
+// }
 
-//store total keypresses in dictionary
-func (self *Keys_Tracker) store_total_keypresses(keypresses map[interface{}]interface{}) {
-	for key, value := range keypresses {
-		if _, ok := self.keypress_total_dict[key]; ok {
-			self.keypress_total_dict[key] = self.keypress_total_dict[key].(int) + value.(int)
-		} else {
-			self.keypress_total_dict[key] = value
-		}
-	}
-}
+// // return top n keypresses from store_keypresses dictionary
+// func top_n_keypresses(n int) []interface{} {
+// 	var top_n []interface{}
+// 	for i := 0; i < n; i++ {
+// 		var max_key interface{}
+// 		var max_value int
+// 		for key, value := range keypresses {
+// 			if value.(int) > max_value {
+// 				max_value = value.(int)
+// 				max_key = key
+// 			}
+// 		}
+// 		top_n = append(top_n, max_key)
+// 		delete(keypresses, max_key)
+// 	}
+// 	return top_n
+// }
 
-//count how many keypresses in interval and store in dictionary
-func (self *Keys_Tracker) count_keypresses(keypresses map[interface{}]interface{}) map[interface{}]interface{} {
-	keypresses_count := map[interface{}]interface{}{}
-	for key, value := range keypresses {
-		if _, ok := keypresses_count[key]; ok {
-			keypresses_count[key] = keypresses_count[key].(int) + value.(int)
-		} else {
-			keypresses_count[key] = value
-		}
-	}
-	return keypresses_count
-}
-
-//return top n keypresses from store_keypresses dictionary
-func (self *Keys_Tracker) get_top_keypresses(n interface{}) []interface{} {
-	keypresses_total = []interface{}{}
-	for key, value := range self.keypresses {
-		keypresses_total = append(keypresses_total, []interface{}{key, value})
-	}
-	return keypresses_total
-}
-
-//return top n keypresses from store_total_keypresses dictionary
-func (self *Keys_Tracker) get_top_total_keypresses(n interface{}) []interface{} {
-	keypresses_total = []interface{}{}
-	for key, value := range self.keypress_total_dict {
-		keypresses_total = append(keypresses_total, []interface{}{key, value})
-	}
-	return keypresses_total
-}
-
-//calculate average keypresses speed per minute
-func (self *Keys_Tracker) get_keypress_speed() []interface{} {
-	keypress_speed = []interface{}{}
-	for key, value := range self.keypresses {
-		keypress_speed = append(keypress_speed, []interface{}{key, value.(int) / self.session.(int)})
-	}
-	return keypress_speed
-}
+// // calculate average keypresses speed per minute
+// func calculate_speed() float64 {
+// 	var sum int
+// 	for _, value := range keypress_speed {
+// 		sum += value.(int)
+// 	}
+// 	return float64(sum) / int(*session) * 60
+// }
