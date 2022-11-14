@@ -1,160 +1,107 @@
 package main
 
 import (
-	"bytes"
-	"fmt"
-	"os"
-	"text/template"
 	"time"
 )
 
-// func variables() {
-// 	interval := flag.Float64("interval", 1.0, "interval in seconds")
-// 	session := flag.Float64("session", 60.0, "session in seconds")
-// 	n := flag.Int("n", 5, "top n keypresses")
-// 	flag.Parse()
+var keypresses = []string{}
+var keypresses_total = []string{}
+
+// integer variables
+var interval = 10
+var session = 20
+var n int = 3 // number of top keypresses to print
+
+// // store each keypresses separetely as number of keypresses
+// func store_keypress() {
+// 	println("")
+// 	println("Waiting for keypresses...")
+// 	reader := bufio.NewReader(os.Stdin)
+// 	for {
+// 		char, _, _ := reader.ReadRune()
+// 		keypresses = append(keypresses, string(char))
+// 	}
 // }
 
-var keypresses map[interface{}]interface{}
-var keypress_total_dict map[interface{}]interface{}
-var keypresses_total []interface{}
-var keypress_speed []interface{}
+// // remove non alphanumeric characters from keypresses list
+// var nonAlphanumericRegex = regexp.MustCompile(`[^a-zA-Z0-9 ]+`)
 
-var interval float64
-var session float64
+// func clearString(keypresses []string) {
+// 	for i, v := range keypresses {
+// 		keypresses[i] = nonAlphanumericRegex.ReplaceAllString(v, "")
+// 	}
+// }
 
-// store keypresses in keypress dictionary
-func store_keypress(keypress interface{}) {
-	if keypresses[keypress] == nil {
-		keypresses[keypress] = 1
-	} else {
-		keypresses[keypress] = keypresses[keypress].(int) + 1
-	}
-}
+// // top n keypresses of list
+// func top_n_keypresses(n int, keypresses []string) {
+// 	// sort keypresses
+// 	sort.Strings(keypresses)
+// 	// count keypresses
+// 	count := make(map[string]int)
+// 	for _, v := range keypresses {
+// 		count[v]++
+// 	}
+// 	// sort keypresses by count
+// 	type kv struct {
+// 		Key   string
+// 		Value int
+// 	}
+// 	var ss []kv
+// 	for k, v := range count {
+// 		ss = append(ss, kv{k, v})
+// 	}
+// 	sort.Slice(ss, func(i, j int) bool {
+// 		return ss[i].Value > ss[j].Value
+// 	})
+// 	// print top n keypresses
+// 	if len(ss) < n {
+// 		n = len(ss)
+// 	}
+// 	println("Top", n, "keypresses:")
+// 	for i := 0; i < n; i++ {
+// 		fmt.Printf("%s: %d, ", ss[i].Key, ss[i].Value)
+// 	}
+// }
 
-// store total keypresses in dictionary
-func store_keypress_total(keypress interface{}) {
-	if keypress_total_dict[keypress] == nil {
-		keypress_total_dict[keypress] = 1
-	} else {
-		keypress_total_dict[keypress] = keypress_total_dict[keypress].(int) + 1
-	}
-}
+// // calculate typing speed of current session
+// func typing_speed(list []string) {
+// 	// calculate typing speed
+// 	var speed float64 = float64(len(list)) / (float64(session) / 60)
+// 	// print typing speed
+// 	println("")
+// 	fmt.Printf("Speed of session: %.1f keypresses per minute", speed)
+// 	fmt.Println()
+// }
 
-// sum how many keypresses in interval and store in dictionary
-func count_keypresses() {
-	for i := 0; i < len(keypresses_total); i++ {
-		store_keypress(keypresses_total[i])
-	}
-}
-
-// return top n keypresses from store_keypresses dictionary
-func top_n_keypresses(n int) []interface{} {
-	var top_n []interface{}
-	for i := 0; i < n; i++ {
-		var max_key interface{}
-		var max_value int
-		for key, value := range keypresses {
-			if value.(int) > max_value {
-				max_value = value.(int)
-				max_key = key
-			}
-		}
-		top_n = append(top_n, max_key)
-		delete(keypresses, max_key)
-	}
-	return top_n
-}
-
-// calculate average keypresses speed per minute
-func calculate_speed() float64 {
-	var sum int
-	for _, value := range keypress_speed {
-		sum += value.(int)
-	}
-	return float64(sum) / 60 //TO DO: make it dynamic
-}
+/* ------------------------------ MAIN FUNCTION ----------------------------- */
 func main() {
-	fmt.Println(func() string {
-		var buf bytes.Buffer
-		err := template.Must(template.New("f").Parse("Started, keypresses will be tracked every {{.interval}} seconds for {{.session}} seconds.")).Execute(&buf, map[string]interface {
-		}{"interval": interval, "session": session})
-		if err != nil {
-			panic(err)
-		}
-		return buf.String()
-	}())
-	fmt.Println("")
-	fmt.Println("------------INTERVAL STATS----------")
-	start_time := float64(time.Now().UnixNano()) / 1000000000.0
-	for float64(time.Now().UnixNano())/1000000000.0-start_time < session {
-		fmt.Println(func() string {
-			var buf bytes.Buffer
-			err := template.Must(template.New("f").Parse("Keypress in {{.interval}} seconds: ")).Execute(&buf, map[string]interface {
-			}{"interval": interval})
-			if err != nil {
-				panic(err)
-			}
-			return buf.String()
-		}(), count_keypresses(keypresses))
-		fmt.Println(func() string {
-			var buf bytes.Buffer
-			err := template.Must(template.New("f").Parse("Top 3 keypresses: ")).Execute(&buf, map[string]interface {
-			}{})
-			if err != nil {
-				panic(err)
-			}
-			return buf.String()
-		}(), top_n_keypresses(keypresses, n))
-		fmt.Println(func() string {
-			var buf bytes.Buffer
-			err := template.Must(template.New("f").Parse("Current session speed:")).Execute(&buf, map[string]interface {
-			}{})
-			if err != nil {
-				panic(err)
-			}
-			return buf.String()
-		}(), calculate_average_speed(keypress_speed), "characters per minute")
-		store_total_keypresses(keypresses)
-		keypresses := nil
-		fmt.Println("------------------------------------")
+	println("")
+	println("Started, keypresses will be tracked in", interval, "seconds intervals of", session, "seconds")
+	println("")
+	//for every interval of time print number of keypresses
+	for i := 0; i < session; i += interval {
+		go store_keypress()
+		time.Sleep(time.Duration(interval) * time.Second)
+		println("")
+		println("------INTERVAL STATS------")
+		clearString(keypresses)
+		// for key, value := range keypresses {
+		// 	println(key, value)
+		// }
+		println("Keypress in", interval, "seconds:", len(keypresses))
+		keypresses_total = append(keypresses_total, keypresses...)
+		// calculate typing speed of current session
+		top_n_keypresses(n, keypresses)
+		typing_speed(keypresses_total)
+		//clear keypresses list
+		keypresses = []string{}
+		println("--------------------------")
 	}
-	fmt.Println("")
-	fmt.Println("------------SESSION STATS----------")
-	fmt.Println(func() string {
-		var buf bytes.Buffer
-		err := template.Must(template.New("f").Parse("Total keypresses: ")).Execute(&buf, map[string]interface {
-		}{})
-		if err != nil {
-			panic(err)
-		}
-		return buf.String()
-	}(), sum(keypresses_total))
-	fmt.Println(func() string {
-		var buf bytes.Buffer
-		err := template.Must(template.New("f").Parse("Top 3 keypresses: ")).Execute(&buf, map[string]interface {
-		}{})
-		if err != nil {
-			panic(err)
-		}
-		return buf.String()
-	}(), top_n_keypresses(keypress_total_dict, n))
-	fmt.Println(func() string {
-		var buf bytes.Buffer
-		err := template.Must(template.New("f").Parse("Final session speed:")).Execute(&buf, map[string]interface {
-		}{})
-		if err != nil {
-			panic(err)
-		}
-		return buf.String()
-	}(), calculate_average_speed(keypress_speed), "characters per minute")
-	fmt.Println("")
-}
-func init() {
-	if session < interval {
-		fmt.Println("Session time must be greater than interval time. Check it and try again.")
-		os.Exit(0)
-	} else {
-		main()
-	}
+	println("")
+	println("------TOTAL STATS------")
+	println("Keypress in", session, "seconds:", len(keypresses_total))
+	// top n keypresses_total of list
+	top_n_keypresses(n, keypresses_total)
+	// calculate typing speed of current session
+	typing_speed(keypresses_total)
 }
