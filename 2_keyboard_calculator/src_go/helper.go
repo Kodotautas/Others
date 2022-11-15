@@ -8,6 +8,17 @@ import (
 	"sort"
 )
 
+var interval int
+var session int
+
+func input_variables() {
+	// input interval and session
+	fmt.Println("Enter interval in seconds:")
+	fmt.Scanln(&interval)
+	fmt.Println("Enter session in seconds:")
+	fmt.Scanln(&session)
+}
+
 // store each keypresses separetely as number of keypresses
 func store_keypress() {
 	println("")
@@ -19,17 +30,6 @@ func store_keypress() {
 	}
 }
 
-// func store_keypress() {
-// 	println("")
-// 	println("Waiting for keypresses...")
-// 	reader := bufio.NewReader(os.Stdin)
-// 	for {
-// 		char, _, _ := reader.ReadRune()
-// 		keypresses :=
-// 		keypresses = append(keypresses, string(char))
-// 	}
-// }
-
 // remove non alphanumeric characters from keypresses list
 var nonAlphanumericRegex = regexp.MustCompile(`[^a-zA-Z0-9 ]+`)
 
@@ -40,7 +40,7 @@ func clearString(keypresses []string) {
 }
 
 // top n keypresses of list
-func top_n_keypresses(n int, keypresses []string) {
+func top_n_keypresses(n int, keypresses []string, period string) {
 	// sort keypresses
 	sort.Strings(keypresses)
 	// count keypresses
@@ -64,7 +64,7 @@ func top_n_keypresses(n int, keypresses []string) {
 	if len(ss) < n {
 		n = len(ss)
 	}
-	println("Top", n, "keypresses:")
+	println("Top", n, period, "keypresses:")
 	for i := 0; i < n; i++ {
 		fmt.Printf("%s: %d, ", ss[i].Key, ss[i].Value)
 	}
