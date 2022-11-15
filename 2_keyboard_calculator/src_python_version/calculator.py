@@ -23,10 +23,3 @@ def main ():
     print(f'Top 3 keypresses: ', keys_tracker.top_n_keypresses(keypress_total_dict, n))
     print(f'Final session speed:', keys_tracker.calculate_average_speed(keypress_speed), 'characters per minute')
     print('')
-
-#if session less than interval, print error
-if session < interval:
-    print('Session time must be greater than interval time. Check it and try again.')
-    sys.exit()
-else:
-    main()

@@ -12,17 +12,26 @@ var interval int
 var session int
 
 func input_variables() {
-	// input interval and session
+	// //interval must be greater than 0 and not string
 	fmt.Println("Enter interval in seconds:")
 	fmt.Scanln(&interval)
+	if interval <= 0 || interval == 0 {
+		fmt.Println("Interval must be greater than 0 and not string. Program exits.")
+		os.Exit(0)
+	}
+	// session variable must be greater than 0 and not string
 	fmt.Println("Enter session in seconds:")
 	fmt.Scanln(&session)
+	if session <= 0 || session == 0 {
+		fmt.Println("Session must be greater than 0 and not string. Program exits.")
+		os.Exit(0)
+	}
 }
 
 // store each keypresses separetely as number of keypresses
 func store_keypress() {
 	println("")
-	println("Waiting for keypresses...")
+	println("Waiting for keypresses... and press enter in the end")
 	reader := bufio.NewReader(os.Stdin)
 	for {
 		char, _, _ := reader.ReadRune()

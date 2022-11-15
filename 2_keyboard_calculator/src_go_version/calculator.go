@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"time"
 )
 
@@ -15,7 +16,6 @@ var n int = 3 // number of top keypresses to print
 /* ------------------------------ MAIN FUNCTION ----------------------------- */
 func calculator() {
 	println("")
-	input_variables()
 	println("Started, keypresses will be tracked in", interval, "seconds intervals of", session, "seconds")
 	println("")
 	//for every interval of time print number of keypresses
@@ -45,4 +45,5 @@ func calculator() {
 	// calculate typing speed of current session
 	typing_speed(keypresses_total)
 	println("--------------------------")
+	os.Exit(0)
 }
