@@ -17,12 +17,13 @@ def main():
         if not session.isdigit() or int(session) <= 0:
             print('Session must be a number and greater than 0. Program exits.')
             sys.exit()
+        #compare interval and session
         if session < interval:
             print('Session time must be greater than interval time. Program exits.')
-            sys.exit()
         task = input("Enter 'start' / 'stop' to manage app: ")
         if task == 'start':
             subprocess.call(f'python calculator.py -i {interval} -s {session}', cwd=location)
+            sys.exit()
         elif task == 'stop':
             sys.exit()
         else:

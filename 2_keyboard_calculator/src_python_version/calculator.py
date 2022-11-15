@@ -23,3 +23,6 @@ def main ():
     print(f'Top 3 keypresses: ', keys_tracker.top_n_keypresses(keypress_total_dict, n))
     print(f'Final session speed:', keys_tracker.calculate_average_speed(keypress_speed), 'characters per minute')
     print('')
+
+if __name__ == '__main__':
+    main()
