@@ -3,7 +3,7 @@
 Program tracks keypresses during the intervals of the session.
 
 ## More details
-1. When program is started (input = "start") it tracks keypresses.
+1. When program is started (input = "start") it tracks keypresses (in background)
 
 2. In each interval of session it returns: 
 (a) how many keys pressed, 
