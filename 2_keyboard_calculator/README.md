@@ -1,4 +1,4 @@
-# Keypress tracker in Go and Python languages
+# Keypress tracker in Go & Python languages
 
 Go version can find in: /src_go_version
 
