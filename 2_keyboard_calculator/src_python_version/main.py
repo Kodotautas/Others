@@ -20,6 +20,7 @@ def main():
         #compare interval and session
         if session < interval:
             print('Session time must be greater than interval time. Program exits.')
+            sys.exit()
         task = input("Enter 'start' / 'stop' to manage app: ")
         if task == 'start':
             subprocess.call(f'python calculator.py -i {interval} -s {session}', cwd=location)
