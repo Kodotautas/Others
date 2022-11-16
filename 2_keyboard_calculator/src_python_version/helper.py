@@ -15,10 +15,11 @@ n = args.top_n
 
 keypresses = {} #for keypresses in interval
 keypress_total_dict = {} #for top n keypresses of the session
-keypresses_total = [] #for otal count of keypresses
+keypresses_total = [] #for  total count of keypresses
 keypress_speed = [] #for keypresses speed
 
 
+# -------------------------------- KEY TRACKER ------------------------------- #
 class Keys_Tracker:
     def __init__(self):
         self.keypresses = {}
@@ -31,7 +32,7 @@ class Keys_Tracker:
     def store_keypresses(self):
         """store keypresses in dictionaries
         Returns:
-            _type_: dictionary and total dictionary of keypresses
+            {}: dictionary of keypresses
         """
         while True:
             if msvcrt.kbhit():
@@ -47,7 +48,7 @@ class Keys_Tracker:
     def store_total_keypresses(self, dictionary):
         """store total keypresses in dictionary
         Returns:
-            _type_: total keypresses
+            {}: total keypresses
         """
         for key, value in dictionary.items():
             if key in keypress_total_dict:
@@ -60,7 +61,7 @@ class Keys_Tracker:
     def count_keypresses(self, dictionary):
         """count how many keypresses in interval, append for speed calculation
         Returns:
-            _type_: sum of keypresses in interval
+            int: sum of keypresses in interval
         """
         start_time = time.time()
         while (time.time() - start_time) < interval:
@@ -79,7 +80,7 @@ class Keys_Tracker:
     def top_n_keypresses(self, dictionary, n):
         """return top n keypresses
         Returns:
-            _type_: top n keypresses
+            {}: top n keypresses
         """
         sorted_keypresses = sorted(dictionary.items(), key=lambda x: x[1], reverse=True)
         #clean up dictionary
@@ -90,9 +91,9 @@ class Keys_Tracker:
 
     #calculate average keypresses speed per minute
     def calculate_average_speed(self, keypress_speed):
-        """calculate average keypresses speed per session
+        """calculate average keypresses speed per session in minutes
         Returns:
-            _type_: average keypresses speed
+            int: average keypresses speed
         """
         speed = int(sum(keypress_speed) / (session/60))
         return speed

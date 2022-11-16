@@ -4,7 +4,8 @@ import sys
 
 location = os.path.dirname(os.path.abspath(__file__))
 
-#main function of the program
+
+# ------------------------------- MAIN FUNCTION ------------------------------ #
 def main():
     while True:
         #interval input and check
@@ -21,6 +22,7 @@ def main():
         if session < interval:
             print('Session time must be greater than interval time. Program exits.')
             sys.exit()
+        #start or stop program with previous users inputs
         task = input("Enter 'start' / 'stop' to manage app: ")
         if task == 'start':
             subprocess.call(f'python calculator.py -i {interval} -s {session}', cwd=location)
@@ -29,6 +31,7 @@ def main():
             sys.exit()
         else:
             print('Invalid input. Try again.')
+
 
 if __name__ == '__main__':
     main()

@@ -5,7 +5,7 @@ Program tracks keypresses during the intervals of the session.
 ## More details
 1. When program is started (input="start") it tracks keypresses. Need to press Enter after input(s).
 
-2. In each interval of session it returns: 
+2. After each interval of session it returns: 
 (a) how many keys pressed, 
 (b) what is top keys and (c) current speed of session (characters per minute).
 

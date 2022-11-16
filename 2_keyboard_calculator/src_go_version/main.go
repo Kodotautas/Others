@@ -7,7 +7,8 @@ import (
 
 var task string
 
-// start subroutines
+/* ------------------------------ MAIN FUNCTION ----------------------------- */
+// start subroutines for tasks
 func main() {
 	input_variables()
 	while := true

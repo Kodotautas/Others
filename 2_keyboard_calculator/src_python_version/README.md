@@ -5,12 +5,11 @@ Program tracks keypresses during the intervals of the session.
 ## More details
 1. When program is started (input = "start") it tracks keypresses (in background)
 
-2. In each interval of session it returns: 
+2. After each interval of session it returns: 
 (a) how many keys pressed, 
 (b) what is top keys and (c) characters per minute speed of session.
 
 3. At session ending it returns the same parameters as during the interval.
-
 
 ## Main arguments:
 ```Python

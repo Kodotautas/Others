@@ -11,6 +11,7 @@ import (
 var interval int
 var session int
 
+// get interval and session from user
 func input_variables() {
 	// //interval must be greater than 0 and not string
 	fmt.Println("Enter interval in seconds:")
@@ -39,19 +40,16 @@ func store_keypress() {
 	}
 }
 
-// remove non alphanumeric characters from keypresses list
-var nonAlphanumericRegex = regexp.MustCompile(`[^a-zA-Z0-9 ]+`)
-
-func clearString(keypresses []string) {
-	for i, v := range keypresses {
-		keypresses[i] = nonAlphanumericRegex.ReplaceAllString(v, "")
+// remove special characters from string
+func removeSpecialChars(list []string) {
+	for i := 0; i < len(list); i++ {
+		re := regexp.MustCompile("[^a-zA-Z0-9]+")
+		list[i] = re.ReplaceAllString(list[i], "Special_char")
 	}
 }
 
 // top n keypresses of list
 func top_n_keypresses(n int, keypresses []string, period string) {
-	// sort keypresses
-	sort.Strings(keypresses)
 	// count keypresses
 	count := make(map[string]int)
 	for _, v := range keypresses {
@@ -81,7 +79,7 @@ func top_n_keypresses(n int, keypresses []string, period string) {
 
 // calculate typing speed of current session
 func typing_speed(list []string) {
-	// calculate typing speed
+	// typing speed calculation
 	var speed float64 = float64(len(list)) / (float64(session) / 60)
 	// print typing speed
 	println("")

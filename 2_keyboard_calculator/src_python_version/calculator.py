@@ -3,7 +3,8 @@ import sys
 import os
 from helper import *
 
-#main function
+
+# ------------------------------- MAIN FUNCTION ------------------------------ #
 def main ():
     keys_tracker = Keys_Tracker()
     print(f'Started, keypresses will be tracked every {interval} seconds for {session} seconds.')
@@ -16,7 +17,7 @@ def main ():
         keys_tracker.store_total_keypresses(keypresses)
         keypresses.clear()
         print('------------------------------------')
-    
+    #session info
     print('')
     print('------------SESSION STATS----------')
     print(f'Total keypresses: ', sum(keypresses_total))
