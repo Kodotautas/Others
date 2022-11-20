@@ -17,15 +17,20 @@ func input_variables() {
 	fmt.Println("Enter interval in seconds:")
 	fmt.Scanln(&interval)
 	if interval <= 0 || interval == 0 {
-		fmt.Println("Interval must be greater than 0 and not string. Program exits.")
-		os.Exit(0)
+		fmt.Println("Interval must be greater than 0 and not string.")
+		input_variables()
 	}
 	// session variable must be greater than 0 and not string
 	fmt.Println("Enter session in seconds:")
 	fmt.Scanln(&session)
 	if session <= 0 || session == 0 {
-		fmt.Println("Session must be greater than 0 and not string. Program exits.")
-		os.Exit(0)
+		fmt.Println("Session must be greater than 0 and not string.")
+		input_variables()
+	}
+	// session varianle must be equal or greater than interval variable
+	if session < interval {
+		fmt.Println("Session must be equal or greater than interval. Try again.")
+		input_variables()
 	}
 }
 
