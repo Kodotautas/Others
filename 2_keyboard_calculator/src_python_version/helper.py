@@ -1,3 +1,5 @@
+import subprocess
+import sys
 import time
 import msvcrt
 import argparse

@@ -1,4 +1,4 @@
-// tests for the calculator
+// tests for the main functions
 package main
 
 import (

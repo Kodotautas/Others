@@ -22,8 +22,5 @@ parser.add_argument("-n", "--top_n", help="top n keypresses", type=int, default=
 ## How to use it?
 ### Write your inputs after program is launched
 `"py main.py'"`
-### or set it via CLI, example:
+### or set it via CLI (-n is optnional), example:
 `"py main.py -i 20 -s 80 -n 5"`
-
-
-
