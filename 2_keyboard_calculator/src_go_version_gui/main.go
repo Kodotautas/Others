@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"os"
 
 	"fyne.io/fyne"
@@ -16,20 +15,23 @@ func main() {
 	w := a.NewWindow("Keypress Calculator")
 	w.Resize(fyne.NewSize(450, 300))
 
-	interval := widget.NewEntry()
-	interval.SetPlaceHolder("Enter interval in seconds:")
+	type numericalEntry struct {
+		widget.Entry
+	}
 
-	session := widget.NewEntry()
-	session.SetPlaceHolder("Enter session in seconds:")
+	interval := numericalEntry{}
+	session := numericalEntry{}
 
 	// add start and stop buttons
 	w.SetContent(widget.NewVBox(
-		interval,
-		session,
+		widget.NewLabel("Enter interval in seconds:"),
+		&interval,
+		widget.NewLabel("Enter session in seconds:"),
+		&session,
 		widget.NewButton("Start", func() {
-			log.Println(interval.Text)
+			calculator(interval, session)
 		}),
-		widget.NewButton("Exit app", func() {
+		widget.NewButton("Exit", func() {
 			os.Exit(0)
 		}),
 	))

@@ -88,10 +88,3 @@ func typing_speed(list []string) {
 	fmt.Printf("Speed of session: %.1f keypresses per minute", speed)
 	fmt.Println()
 }
-
-// convert text to integer
-func convertToInt(text string) int {
-	var number int
-	fmt.Sscan(text, &number)
-	return number
-}
