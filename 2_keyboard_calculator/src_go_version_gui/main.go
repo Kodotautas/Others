@@ -1,33 +1,38 @@
 package main
 
 import (
+	"log"
+	"os"
+
 	"fyne.io/fyne"
 	"fyne.io/fyne/app"
 	"fyne.io/fyne/widget"
 )
 
-var task string
-
-/* ------------------------------ MAIN FUNCTION ----------------------------- */
+/* --------------------------------- PROGRAM -------------------------------- */
 // main function to run the program
 func main() {
 	a := app.New()
 	w := a.NewWindow("Keypress Calculator")
-	w.Resize(fyne.NewSize(500, 300))
+	w.Resize(fyne.NewSize(450, 300))
+
+	interval := widget.NewEntry()
+	interval.SetPlaceHolder("Enter interval in seconds:")
+
+	session := widget.NewEntry()
+	session.SetPlaceHolder("Enter session in seconds:")
+
 	// add start and stop buttons
 	w.SetContent(widget.NewVBox(
-		widget.NewLabel("Choose your task"),
+		interval,
+		session,
 		widget.NewButton("Start", func() {
-			task = "start"
+			log.Println(interval.Text)
 		}),
-		widget.NewButton("Stop", func() {
-			task = "stop"
+		widget.NewButton("Exit app", func() {
+			os.Exit(0)
 		}),
 	))
-	// if stop button is pressed, exit the program
-	if task == "stop" {
-		w.Close()
-	}
 
 	w.ShowAndRun()
 

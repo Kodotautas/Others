@@ -11,7 +11,7 @@ var keypresses_total = []string{}
 var n int = 3 // number of top keypresses to print
 
 /* ------------------------------- CALCULATOR ------------------------------- */
-func calculator() {
+func calculator(interval int, session int) {
 	println("")
 	println("Started, keypresses will be tracked in", interval, "seconds intervals of", session, "seconds")
 	println("")

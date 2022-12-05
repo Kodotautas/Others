@@ -18,19 +18,16 @@ func input_variables() {
 	fmt.Scanln(&interval)
 	if interval <= 0 || interval == 0 {
 		fmt.Println("Interval must be greater than 0 and not string.")
-		main()
 	}
 	// session variable must be greater than 0 and not string
 	fmt.Println("Enter session in seconds:")
 	fmt.Scanln(&session)
 	if session <= 0 || session == 0 {
 		fmt.Println("Session must be greater than 0 and not string.")
-		main()
 	}
 	// session varianle must be equal or greater than interval variable
 	if session < interval {
 		fmt.Println("Session must be equal or greater than interval. Try again.")
-		main()
 	}
 }
 
@@ -90,4 +87,11 @@ func typing_speed(list []string) {
 	println("")
 	fmt.Printf("Speed of session: %.1f keypresses per minute", speed)
 	fmt.Println()
+}
+
+// convert text to integer
+func convertToInt(text string) int {
+	var number int
+	fmt.Sscan(text, &number)
+	return number
 }
