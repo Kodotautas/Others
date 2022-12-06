@@ -1,4 +1,4 @@
-# Keypress tracker (Go version) adding GUI (using fyne.io) (not finished)
+# Keypress tracker (Go version) adding GUI (using fyne.io)
 
 Program tracks keypresses during the intervals of the session.
 
