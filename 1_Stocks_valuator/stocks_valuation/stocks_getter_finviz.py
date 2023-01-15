@@ -76,6 +76,9 @@ stocks_df = stocks_df[(stocks_df['forwardEps'] > 0) & (stocks_df['MOS']>0)]
 #sort by Margin of Safety
 stocks_df = stocks_df.sort_values(by=['MOS'], ascending=False)
 
+# drop MOS values larger than 10
+stocks_df = stocks_df[stocks_df['MOS'] < 10]
+
 # reorder columns
 stocks_df = stocks_df[['Ticker', 'industry', 'marketCap', 'regularMarketPrice', 'dividendYield', 'Price', 'fair_value', 'MOS']]
 
