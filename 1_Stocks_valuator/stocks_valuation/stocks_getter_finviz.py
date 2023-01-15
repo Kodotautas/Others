@@ -83,5 +83,5 @@ stocks_df = stocks_df[stocks_df['MOS'] < 10]
 stocks_df = stocks_df[['Ticker', 'industry', 'marketCap', 'regularMarketPrice', 'dividendYield', 'Price', 'fair_value', 'MOS']]
 
 #export csv
-stocks_df.to_excel(f'{cwd}/data/stocks_valuation_{sector}_{today}.xlsx')
+stocks_df.to_excel(f'{cwd}/data/stocks_valuation_{sector}_{today}.xlsx', index=False)
 print('Stocks values calculated successfully and exported!')
