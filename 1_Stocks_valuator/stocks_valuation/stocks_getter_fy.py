@@ -12,7 +12,7 @@ today = date.today()
 # -------------------------------- STOCKS LIST ------------------------------- #
 stocks_df = pd.read_csv(f'{cwd}/data/stocks.csv')
 stocks = stocks_df['Ticker'].to_list()
-# stocks = ['MSFT', 'NVDA']
+stocks = ['MSFT', 'NVDA']
 print('Stocks list loaded!')
 
 
@@ -82,7 +82,7 @@ df['MOS'] = (df['fair_value'] - df['regularMarketPrice']) / df['regularMarketPri
 #filter negative earnings and MOS
 df = df[(df['Earnings Estimate Avg'] > 0) & (df['MOS']>0)]
 
-#sort
+#sort by Margin of Safety
 df = df.sort_values(by=['MOS'], ascending=False)
 
 #export csv
