@@ -34,10 +34,10 @@ for ticker in tickerStrings:
 
 # combine all dataframes into a single dataframe
 df_info = pd.DataFrame(df_list)
-df_info = df_info[['ticker', 'industry', 'marketCap', 'regularMarketPrice', '52WeekChange', 'dividendYield', 'forwardEps']]
+df_info = df_info[['ticker', 'industry', '52WeekChange', 'dividendYield', 'forwardEps']]
 
 df_info['dividendYield'] = df_info['dividendYield'] * 100 #convert to percentage
-df_info['marketCap'] = df_info['marketCap'] / 1000000000 #convert to billions
+# df_info['marketCap'] = df_info['marketCap'] / 1000000000 #convert to billions
 print('Stocks info loaded.')
 
 
@@ -80,7 +80,7 @@ stocks_df = stocks_df.sort_values(by=['MOS'], ascending=False)
 stocks_df = stocks_df[stocks_df['MOS'] < 10]
 
 # reorder columns
-stocks_df = stocks_df[['Ticker', 'industry', 'marketCap', 'regularMarketPrice', 'dividendYield', 'Price', 'fair_value', 'MOS']]
+stocks_df = stocks_df[['Ticker', 'industry', 'Market Cap', 'dividendYield', 'Price', 'fair_value', 'MOS']]
 
 #export csv
 stocks_df.to_excel(f'{cwd}/data/stocks_valuation_{sector}_{today}.xlsx', index=False)
