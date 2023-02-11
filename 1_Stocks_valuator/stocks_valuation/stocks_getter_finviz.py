@@ -1,14 +1,12 @@
+# Script to get stocks valuation from finviz.com
 import yfinance as yf
 import pandas as pd
 import os
 from datetime import date
-from stocks_list import filters
 
 cwd = os.getcwd()
-sector = filters[0] #get loaded sector
-# sector = 'sec_technology'
 today = date.today()
-
+print('Current working directory: ', cwd)
 
 # ----------------------------- LOAD STOCKS LIST ----------------------------- #
 stocks_df = pd.read_csv(f'{cwd}/data/stocks.csv')
